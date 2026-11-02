@@ -1,5 +1,7 @@
-% verbdef.sty v0.2 -- Robin Fairbairns 2000/10/06
-\ProvidesPackage{verbdef}[2000/10/06 v0.2 define verbatim csnames]
+% verbdef.sty v0.2a
+% Author: Robin Fairbairns
+% Maintainer: LaTeX Project (https://github.com/LaTeX-Package-Repositories/verbdef)
+\ProvidesPackage{verbdef}[2026/11/02 v0.2a define verbatim csnames]
 
 % This package provides a single command \verbdef
 %
@@ -25,9 +27,8 @@
 % conditions of the LaTeX Project Public License, either version 1.1
 % of this license or (at your option) any later version.
 % The latest version of this license is in
-%   http://www.latex-project.org/lppl.txt
-% and version 1.1 or later is part of all distributions of LaTeX 
-% version 1999/06/01 or later.
+%   https://www.latex-project.org/lppl.txt
+% and version 1.3c or later.
 %
 % This program consists of the file verbdef.sty
 
@@ -48,6 +49,8 @@
     \ifverbdef@nostar
       \@vobeyspaces
       \toks@\expandafter{\the\toks@\frenchspacing}%
+    \else % branch for spaces with Unicode engines; gh/#1
+      \toks@\expandafter{\the\toks@\@setupverbvisiblespace}%
     \fi
     \@verb@def}
 
@@ -59,6 +62,9 @@
   \else
     \catcode`#1\active
     \lccode`\~`#1%
+  \fi
+  \ifverbdef@nostar\else % also for Unicode engines
+    \@setupverbvisiblespace\@vobeyspaces
   \fi
   \lowercase{%
     \def\@tempa##1~{%

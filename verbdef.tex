@@ -1,13 +1,25 @@
-\documentclass[a4paper]{article}
-\usepackage[dvips,a4paper]{geometry}
+\DocumentMetadata{tagging=on,pdfstandard={UA-2,A-4f}}
+\documentclass[a4paper]{l3in2edoc}
+\usepackage{lua-unicode-math}
+\usepackage[a4paper]{geometry}
 \usepackage{verbdef}
+\pdfstringdefDisableCommands{%
+  \def\frenchspacing{}% see gh/#2
+  \def\verbdefcmd{\textbackslash verbdef}%
+  }
 \verbdef\verbdefcmd|\verbdef|
-\providecommand\cs[1]{\texttt{\char`\\#1}}
 \begin{document}
-\title{The \textsf{verbdef} package\thanks{This documents version 0.2, of
-    2000-10-06}}
-\author{Robin Fairbairns}
+\title{The \textsf{verbdef} package\thanks{This documents version 0.2a, of
+    2026-11-02.}}
+\author{%
+  Author: Robin Fairbairns\\
+  Maintainer: \LaTeX{} Project Team\\
+  \normalsize
+  \url{https://github.com/LaTeX-Package-Repositories/verbdef}%
+  }
 \maketitle
+
+\DeleteShortVerb{\|}% so | appears correctly below
 
 \section{What is it for?}
 
