@@ -1,7 +1,7 @@
-% verbdef.sty v0.2a
+% verbdef.sty v0.2b
 % Author: Robin Fairbairns
 % Maintainer: LaTeX Project (https://github.com/LaTeX-Package-Repositories/verbdef)
-\ProvidesPackage{verbdef}[2026/11/02 v0.2a define verbatim csnames]
+\ProvidesPackage{verbdef}[2026/11/09 v0.2b define verbatim csnames]
 
 % This package provides a single command \verbdef
 %
@@ -72,3 +72,23 @@
         {\the\toks@##1}}}}%
   \afterassignment\endgroup
   \@tempa}
+
+\IfFormatAtLeastF{2027-06-01}
+  {%
+    \IfDocumentMetadataT
+      {%
+        \def\@setupverbvisiblespace{%
+        \ifx\verbvisiblespace\asciispace
+          \let\@xobeysp\asciispace
+        \else
+          \setbox\z@\hbox{x}%
+          \setbox\@verbvisiblespacebox\hbox to\wd\z@{\hss\verbvisiblespace\hss}%
+          \def\@xobeysp{%
+            \leavevmode
+            \UseName{tag_mc_reset_box:N}\@verbvisiblespacebox %<--- reset attributes in the box
+            \copy\@verbvisiblespacebox}%
+        \fi
+        \@setupverbvisibletab
+      }
+      }
+  }
